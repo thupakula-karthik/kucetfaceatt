@@ -58,3 +58,4 @@ and compares them with the registered face image. The cosine similarity threshol
 is set to 0.363 as an initial setting; test and calibrate it carefully for your
 camera, lighting and environment. Recognition is not guaranteed to be error-free.
 "# kucetatt" 
+"# kucetfaceatt" 
