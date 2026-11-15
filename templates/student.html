@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Student Portal{% endblock %}
+{% block content %}
+<h1>Student Attendance Portal</h1>
+<form method="get" class="panel inline-form">
+  <label for="student_id">Select Student</label>
+  <select id="student_id" name="student_id" required>
+    <option value="">Choose student</option>
+    {% for s in students %}
+    <option value="{{ s.student_id }}" {% if selected and selected.student_id == s.student_id %}selected{% endif %}>{{ s.name }} ({{ s.student_id }})</option>
+    {% endfor %}
+  </select>
+  <button class="btn" type="submit">View Attendance</button>
+</form>
+{% if selected and summary %}
+<section class="cards">
+  <div class="card"><span>Student</span><strong>{{ selected.name }}</strong></div>
+  <div class="card"><span>Present Sessions</span><strong>{{ summary.present }} / {{ summary.total }}</strong></div>
+  <div class="card"><span>Attendance</span><strong>{{ summary.percentage }}%</strong></div>
+</section>
+<div class="notice {{ 'warning' if summary.risk else 'success' }}">
+  {% if summary.risk %}Risk Alert: Attendance is below 75%.{% else %}Attendance is at or above 75%.{% endif %}
+</div>
+<section class="panel"><h2>Subject-wise Attendance</h2>
+<div class="table-wrap"><table><tr><th>Subject</th><th>Total Sessions</th><th>Present</th><th>Percentage</th></tr>
+{% for row in subjects %}
+{% set pct = (row.present or 0) / row.total * 100 if row.total else 0 %}
+<tr><td>{{ row.subject }}</td><td>{{ row.total }}</td><td>{{ row.present or 0 }}</td><td>{{ "%.1f"|format(pct) }}%</td></tr>
+{% endfor %}
+</table></div></section>
+{% elif selected %}<p>No attendance data available yet.</p>{% endif %}
+{% endblock %}

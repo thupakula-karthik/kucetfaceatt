@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Take Attendance{% endblock %}
+{% block content %}
+<h1>Face Recognition Attendance</h1>
+<p class="muted">Session: <strong>{{ session.subject }}</strong> · {{ session.session_date }} · {{ session.session_time }}</p>
+<section class="panel camera-box">
+  <video id="camera" autoplay playsinline muted></video>
+  <canvas id="captureCanvas" hidden></canvas>
+  <div class="actions">
+    <button class="btn secondary" type="button" data-camera-start>Start Camera</button>
+    <button class="btn" type="button" id="recognizeButton" data-recognize-url="{{ url_for('api_recognize', session_id=session.session_id) }}">Recognize & Mark Attendance</button>
+  </div>
+  <p id="cameraStatus" class="muted">Start the camera, position one student in view, then click Recognize.</p>
+  <div id="recognitionResult" class="result"></div>
+</section>
+<a href="{{ url_for('teacher') }}">Back to Teacher Portal</a>
+{% endblock %}

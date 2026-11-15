@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+attendance.db
+/var/
+faces/
+models/*.onnx
+.DS_Store

@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: student-attendance-risk-analysis
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python download_models.py
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_PATH
+        value: /var/data/attendance.db
+    disk:
+      name: attendance-data
+      mountPath: /var/data
+      sizeGB: 1

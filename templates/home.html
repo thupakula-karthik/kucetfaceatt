@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">FACE RECOGNITION ATTENDANCE</p>
+  <h1>Student Attendance and Risk Analysis System</h1>
+  <p>Recognize students, record class attendance and monitor attendance performance.</p>
+  <div class="actions">
+    <a class="btn" href="{{ url_for('teacher') }}">Teacher Portal</a>
+    <a class="btn secondary" href="{{ url_for('register') }}">Register Student</a>
+  </div>
+</section>
+<section class="cards">
+  <div class="card"><span>Registered Students</span><strong>{{ student_count }}</strong></div>
+  <div class="card"><span>Class Sessions</span><strong>{{ session_count }}</strong></div>
+  <div class="card"><span>Today's Present Records</span><strong>{{ today_count }}</strong></div>
+</section>
+<div class="notice {{ 'success' if models_ready else 'warning' }}">
+  {% if models_ready %}Face recognition models are loaded.{% else %}
+  Face recognition models are not loaded. Run <code>python download_models.py</code> locally or check the Render build logs.
+  {% endif %}
+</div>
+{% endblock %}

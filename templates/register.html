@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Register Student{% endblock %}
+{% block content %}
+<h1>Student Registration</h1>
+<p class="muted">Enter student details and capture one clear face image.</p>
+<form method="post" class="panel" id="registerForm">
+  <div class="grid two">
+    <label>Student ID<input name="student_id" required></label>
+    <label>Student Name<input name="name" required></label>
+    <label>Department<input name="department" required></label>
+    <label>Parent Name<input name="parent_name"></label>
+    <label>Parent Mobile<input name="parent_mobile"></label>
+  </div>
+  <div class="camera-box">
+    <video id="camera" autoplay playsinline muted></video>
+    <canvas id="captureCanvas" hidden></canvas>
+    <input type="hidden" name="face_image" id="faceImage">
+    <div class="actions">
+      <button type="button" class="btn secondary" data-camera-start>Start Camera</button>
+      <button type="button" class="btn" data-camera-capture>Capture Face</button>
+    </div>
+    <p id="cameraStatus" class="muted">Allow camera access when your browser asks.</p>
+  </div>
+  <button class="btn" type="submit">Register Student</button>
+</form>
+{% endblock %}
